@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+
+  backend:
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    build:
+      context: ./backend
+      dockerfile: ./dockerfiles/python310/Dockerfile
+      labels:
+        - backend
+    volumes:
+        - ./backend:/code
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        gunicorn app.main:app --workers 2 \
+        --worker-class uvicorn.workers.UvicornWorker -b 0.0.0.0:5000
+    ports:
+      - 5000:5000
+
+  frontend:
+    restart: unless-stopped
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+      labels:
+        - frontend
+    volumes:
+        - ./frontend:/app
+    ports:
+      - 3000:80
