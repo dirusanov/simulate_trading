@@ -45,11 +45,6 @@ def generate_movement():
    ```
 4. Смотреть как изменяется баланс :)
 
-## License
-Распространено под лицензией MIT. Смотрите `LICENSE.txt`.
-
-Можете эсперементировать с кодом и брать за основу :)
-
 ## Contact
 
 Dmitry Rusanov - random1k11@gmail.com
